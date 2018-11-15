@@ -24,7 +24,7 @@ Player:SetLevel(Integer level)\
 Player:IsAlly(Player player)\
 BaseWars.GetAllFactions()\
 Player:InsertInFaction(String name)\
-BaseWars.GetChatCommands() -> Returns all chat commands.\
+BaseWars.GetChatCommands() -> Returns all chat commands.
 
 **(SERVER)**
 
@@ -41,10 +41,10 @@ BaseWars.Notify(Player target, Integer type, Integer time, String message) -> St
 BaseWars.AddNotification(Player target, Integer type, String message) -> Notification board.\
 BaseWars.StopRaid()\
 BaseWars.StartRaid(Player victim, Player attacker)\
-BaseWars.AddChatCommand(String command, String description, callback)\
+BaseWars.AddChatCommand(String command, String description, callback)
 
 **(CLIENT)**
 
 BaseWars.Notify(Integer type, Integer time, String message) -> Standard notification, notifies the client It's being called on.\
 BaseWars.AddNotification(Integer type, String message) -> Notification board, notifies the client It's being called on.\
-draw.Circle(Number x, Number y, Number Radius, String texture, Color color)\
+draw.Circle(Number x, Number y, Number Radius, String texture, Color color)
