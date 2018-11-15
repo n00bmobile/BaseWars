@@ -5,46 +5,46 @@ Go [here](https://forum.facepunch.com/gmodgd/bubuv/BaseWars-Gamemode-Release/1/)
 
 **(SHARED)**
 
-Entity:GetPrice() -> Returns the price the entity on the Store.&nbsp
-Player:GetFaction() -> Returns the name of the player's faction and a table containing all the relevant information about it (Passwords are only accessible from the SERVER).&nbsp
-Player:CanRaid(Player victim)&nbsp
-Player:IsPartakingRaid() -> Returns 1 if the player is raiding and 2 is he's being raided.&nbsp
-Player:IsRaiding(Player player)&nbsp
-Player:IsRaidable()&nbsp
-BaseWars.GetRaid() -> Returns global raid data, you shouldn't need to use this.&nbsp
-BaseWars.FindPlayer(String name) -> Attempts to find a player by his name.&nbsp
-BaseWars.FormatMoney()&nbsp
-string.MaxLen(String string, Integer length) -> No need to explain this one. I might remove this soon...&nbsp
-Player:CanAfford(Integer amount)&nbsp
-Player:GetMoney()&nbsp
-Player:ReachesLevel(Integer level)&nbsp
-Player:GetLimitXP() -> How much XP the level the player is currently in requires.&nbsp
-Player:GetRequiredXP()&nbsp
-Player:SetLevel(Integer level)&nbsp
-Player:IsAlly(Player player)&nbsp
-BaseWars.GetAllFactions()&nbsp
-Player:InsertInFaction(String name)&nbsp
-BaseWars.GetChatCommands() -> Returns all chat commands.&nbsp
+Entity:GetPrice() -> Returns the price the entity on the Store.\
+Player:GetFaction() -> Returns the name of the player's faction and a table containing all the relevant information about it (Passwords are only accessible from the SERVER).\
+Player:CanRaid(Player victim)\
+Player:IsPartakingRaid() -> Returns 1 if the player is raiding and 2 is he's being raided.\
+Player:IsRaiding(Player player)\
+Player:IsRaidable()\
+BaseWars.GetRaid() -> Returns global raid data, you shouldn't need to use this.\
+BaseWars.FindPlayer(String name) -> Attempts to find a player by his name.\
+BaseWars.FormatMoney()\
+string.MaxLen(String string, Integer length) -> No need to explain this one. I might remove this soon...\
+Player:CanAfford(Integer amount)\
+Player:GetMoney()\
+Player:ReachesLevel(Integer level)\
+Player:GetLimitXP() -> How much XP the level the player is currently in requires.\
+Player:GetRequiredXP()\
+Player:SetLevel(Integer level)\
+Player:IsAlly(Player player)\
+BaseWars.GetAllFactions()\
+Player:InsertInFaction(String name)\
+BaseWars.GetChatCommands() -> Returns all chat commands.\
 
 **(SERVER)**
 
-BaseWars.AddSync(String identifier, callback) -> Acts like a hook, calling the specified function everytime a player spawns for the first time. (MIGHT CHANGE SOON, DO NOT USE IT FOR NOW)&nbsp
-BaseWars.EndSync(String identifier) -> Stops the above from happening. (MIGHT CHANGE SOON, DO NOT USE IT FOR NOW)&nbsp
-Player:AddMoney(Integer amount)&nbsp
-Player:RemoveFromFaction()&nbsp
-Player:SpawnInFront(String class)&nbsp
-Player:SetupVars() -> Don't use it.&nbsp
-Player:SaveData()&nbsp
-BaseWars.SaveDatabase(Player player, String data) -> Don't use it.&nbsp
-Player:AddXP(Integer amount)&nbsp
-BaseWars.Notify(Player target, Integer type, Integer time, String message) -> Standard notification.&nbsp
-BaseWars.AddNotification(Player target, Integer type, String message) -> Notification board.&nbsp
-BaseWars.StopRaid()&nbsp
-BaseWars.StartRaid(Player victim, Player attacker)&nbsp
-BaseWars.AddChatCommand(String command, String description, callback)&nbsp
+BaseWars.AddSync(String identifier, callback) -> Acts like a hook, calling the specified function everytime a player spawns for the first time. (MIGHT CHANGE SOON, DO NOT USE IT FOR NOW)\
+BaseWars.EndSync(String identifier) -> Stops the above from happening. (MIGHT CHANGE SOON, DO NOT USE IT FOR NOW)\
+Player:AddMoney(Integer amount)\
+Player:RemoveFromFaction()\
+Player:SpawnInFront(String class)\
+Player:SetupVars() -> Don't use it.\
+Player:SaveData()\
+BaseWars.SaveDatabase(Player player, String data) -> Don't use it.\
+Player:AddXP(Integer amount)\
+BaseWars.Notify(Player target, Integer type, Integer time, String message) -> Standard notification.\
+BaseWars.AddNotification(Player target, Integer type, String message) -> Notification board.\
+BaseWars.StopRaid()\
+BaseWars.StartRaid(Player victim, Player attacker)\
+BaseWars.AddChatCommand(String command, String description, callback)\
 
 **(CLIENT)**
 
-BaseWars.Notify(Integer type, Integer time, String message) -> Standard notification, notifies the client It's being called on.&nbsp
-BaseWars.AddNotification(Integer type, String message) -> Notification board, notifies the client It's being called on.&nbsp
-draw.Circle(Number x, Number y, Number Radius, String texture, Color color)&nbsp
+BaseWars.Notify(Integer type, Integer time, String message) -> Standard notification, notifies the client It's being called on.\
+BaseWars.AddNotification(Integer type, String message) -> Notification board, notifies the client It's being called on.\
+draw.Circle(Number x, Number y, Number Radius, String texture, Color color)\
