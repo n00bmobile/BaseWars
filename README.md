@@ -1,10 +1,9 @@
-## A free BaseWars gamemode that I'll provide support to, yay!
+# A free yet supported BaseWars gamemode.
 Go [here](https://forum.facepunch.com/gmodgd/bubuv/BaseWars-Gamemode-Release/1/) for more information.
 
-## Documentation (I probably forgot some):
+## Documentation:
 
-**(SHARED)**
-
+**(SHARED)**\
 Entity:GetPrice() -> Returns the price the entity on the Store.\
 Player:GetFaction() -> Returns the name of the player's faction and a table containing all the relevant information about it (Passwords are only accessible from the SERVER).\
 Player:CanRaid(Player victim)\
@@ -26,8 +25,7 @@ BaseWars.GetAllFactions()\
 Player:InsertInFaction(String name)\
 BaseWars.GetChatCommands() -> Returns all chat commands.
 
-**(SERVER)**
-
+**(SERVER)**\
 BaseWars.AddSync(String identifier, callback) -> Acts like a hook, calling the specified function everytime a player spawns for the first time. (MIGHT CHANGE SOON, DO NOT USE IT FOR NOW)\
 BaseWars.EndSync(String identifier) -> Stops the above from happening. (MIGHT CHANGE SOON, DO NOT USE IT FOR NOW)\
 Player:AddMoney(Integer amount)\
@@ -43,8 +41,7 @@ BaseWars.StopRaid()\
 BaseWars.StartRaid(Player victim, Player attacker)\
 BaseWars.AddChatCommand(String command, String description, callback)
 
-**(CLIENT)**
-
+**(CLIENT)**\
 BaseWars.Notify(Integer type, Integer time, String message) -> Standard notification, notifies the client It's being called on.\
 BaseWars.AddNotification(Integer type, String message) -> Notification board, notifies the client It's being called on.\
 draw.Circle(Number x, Number y, Number Radius, String texture, Color color)
