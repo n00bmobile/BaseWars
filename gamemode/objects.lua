@@ -1,8 +1,12 @@
-function GM:PhysgunPickup(ply, ent)
+hook.Add('PhysgunPickup', 'bw_gm_sandboxhooksworkaround_physgunpickup', function(ply, ent) --i'll fix this later...
 	return ent:Health() > 0
-end
+end)
 
-function GM:CanTool(ply, tr, tool)
+--[[function GM:PhysgunPickup(ply, ent)
+	return ent:Health() > 0
+end]]
+
+hook.Add('CanTool', 'bw_gm_sandboxhooksworkaround_cantool', function(ply, tr, tool)
 	local ent = tr.Entity
 	
 	if not ent:IsPlayer() and ent:GetClass() ~= 'prop_physics' and ent:CPPIGetOwner() then
@@ -20,7 +24,27 @@ function GM:CanTool(ply, tr, tool)
 	else
 		return true
 	end
-end
+end)
+
+--[[function GM:CanTool(ply, tr, tool)
+	local ent = tr.Entity
+	
+	if not ent:IsPlayer() and ent:GetClass() ~= 'prop_physics' and ent:CPPIGetOwner() then
+		if tool == 'remover' then
+			if SERVER then
+				local price = ent:GetPrice() *BaseWars.Config.price_refund_multiplier
+				ent:CPPIGetOwner():AddMoney(price)
+				BaseWars.AddNotification(ent:CPPIGetOwner(), 1, 'You got '..BaseWars.FormatMoney(price)..' for your removed '..(ent.PrintName or 'Object')..'.')
+			end
+			
+			return true
+		else
+			return false
+		end
+	else
+		return true
+	end
+end]]
 
 if CLIENT then return end
 
