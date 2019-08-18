@@ -2,7 +2,7 @@
 local meta = FindMetaTable('Entity')
 
 function meta:ReachesLevel(lvl)
-	return self:GetNWInt('level') >= self:GetNWInt('level')
+	return self:GetNWInt('level') >= lvl
 end
 
 function meta:GetLimitXP()

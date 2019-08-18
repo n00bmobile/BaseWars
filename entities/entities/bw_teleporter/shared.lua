@@ -10,7 +10,9 @@ ENT.MaxPower = 100
 -------------------------
 
 hook.Add('PhysgunPickup', 'bw_ents_teleporter_physgun', function(ply, ent)
-	return not (ent:GetClass() == 'bw_teleporter' and ent:GetTurnedOn())
+	if ent:GetClass() == "bw_teleporter" and ent:GetTurnedOn() then 
+		return false 
+	end
 end)
 
 if CLIENT then
