@@ -195,6 +195,14 @@ if SERVER then
 	function GM:PlayerCanHearPlayersVoice(listen, speak)
 		return listen:GetPos():DistToSqr(speak:GetPos()) <= 250000, true --500 squared
 	end
+	
+	function GM:PlayerCanSeePlayersChat(msg, tchat, listen, speak)
+		if tchat then
+			return listen:IsAlly(speak)
+		else
+			return true
+		end
+	end
 return end
 
 function GM:OnPlayerChat(ply, msg, tchat, dead)
@@ -216,12 +224,6 @@ function GM:OnPlayerChat(ply, msg, tchat, dead)
 			
 			table.insert(tags, faction.color)
 			table.insert(tags, '[ '..name..' ] ')
-		elseif tchat then
-			if LocalPlayer() == ply then
-				BaseWars.Notify(1, 5, 'You need to be in a faction to use this chat!')
-			end
-			
-			return true
 		end
 		
 		if LocalPlayer():IsAlly(ply) then
