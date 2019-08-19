@@ -37,7 +37,7 @@ function ENT:Think()
 			effect:SetOrigin(self:GetPos())
 			util.Effect('cball_explode', effect)
 			self:EmitSound('npc/roller/mine/rmine_explode_shock1.wav')
-			self:TakeDamage(10, self:CPPIGetOwner())
+			self:TakeDamage(10)
 			self.ChargingSound:ChangePitch(100, 0)
 			self:SetMaterial('')
 			

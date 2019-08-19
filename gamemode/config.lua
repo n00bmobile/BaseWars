@@ -526,6 +526,15 @@ BaseWars.Config.buyables = {
 				limit = 1,
 				level = 5
 			},
+			
+			['bw_drink_xp'] = {
+				name = 'Mysterious Misture',
+				model = 'models/props_junk/PopCan01a.mdl',
+				desc = "What secrets does this hold?",
+				price = 200000,
+				limit = 1,
+				level = 0
+			},
 		}
 	},
 }
