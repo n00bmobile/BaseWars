@@ -13,7 +13,7 @@ Player:IsRaidable()\
 BaseWars.GetRaid() -> Returns global raid data, you shouldn't need to use this.\
 BaseWars.FindPlayer(String name) -> Attempts to find a player by his name.\
 BaseWars.FormatMoney()\
-string.MaxLen(String string, Integer length) -> No need to explain this one. I might remove this soon...\
+string.MaxLen(String string, Integer length) -> No need to explain this one.\
 Player:CanAfford(Integer amount)\
 Player:GetMoney()\
 Player:ReachesLevel(Integer level)\
@@ -26,22 +26,23 @@ Player:InsertInFaction(String name)\
 BaseWars.GetChatCommands() -> Returns all chat commands.
 
 **(SERVER)**\
-BaseWars.AddSync(String identifier, callback) -> Acts like a hook, calling the specified function everytime a player spawns for the first time. (MIGHT CHANGE SOON, DO NOT USE IT FOR NOW)\
-BaseWars.EndSync(String identifier) -> Stops the above from happening. (MIGHT CHANGE SOON, DO NOT USE IT FOR NOW)\
 Player:AddMoney(Integer amount)\
 Player:RemoveFromFaction()\
 Player:SpawnInFront(String class)\
-Player:SetupVars() -> Don't use it.\
+Player:SetupVars()\
 Player:SaveData()\
-BaseWars.SaveDatabase(Player player, String data) -> Don't use it.\
 Player:AddXP(Integer amount)\
-BaseWars.Notify(Player target, Integer type, Integer time, String message) -> Standard notification.\
+BaseWars.SaveDatabase(Player player, String data) -> Don't use it.\
+BaseWars.Notify(Player target, Integer type, Number time, String message) -> Standard notification.\
 BaseWars.AddNotification(Player target, Integer type, String message) -> Notification board.\
 BaseWars.StopRaid()\
 BaseWars.StartRaid(Player victim, Player attacker)\
-BaseWars.AddChatCommand(String command, String description, callback)
+BaseWars.AddChatCommand(String command, String description, callback)\
+BaseWars.AddSync(String identifier, callback) -> Acts like a hook, calling the specified function everytime a player loads/reloads. (MIGHT REMOVE OR CHANGE BEHAVIOR)\
+BaseWars.EndSync(String identifier) -> Stops the above from happening. (MIGHT REMOVE)\
+GM:PlayerLoaded(Player player) -> Hook for when the player's game loads.
 
 **(CLIENT)**\
-BaseWars.Notify(Integer type, Integer time, String message) -> Standard notification, notifies the client It's being called on.\
+BaseWars.Notify(Integer type, Number time, String message) -> Standard notification, notifies the client It's being called on.\
 BaseWars.AddNotification(Integer type, String message) -> Notification board, notifies the client It's being called on.\
 draw.Circle(Number x, Number y, Number Radius, String texture, Color color)

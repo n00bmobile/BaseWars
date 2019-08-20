@@ -22,8 +22,6 @@ AddCSLuaFile('objects.lua')
 AddCSLuaFile('notifications.lua') --hl2soung15
 AddCSLuaFile('leveling.lua')
 AddCSLuaFile('raiding.lua')
-
---server
 AddCSLuaFile('player.lua')
 
 include('shared.lua')
