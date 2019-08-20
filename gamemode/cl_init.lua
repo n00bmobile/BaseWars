@@ -10,6 +10,7 @@ include('notifications.lua')
 include('leveling.lua')
 include('cl_menu.lua')
 include('raiding.lua')
+include('player.lua')
 
 surface.CreateFont('ImpactSmall', {font = 'Impact', size = 24})
 surface.CreateFont('ImpactMedium', {font = 'Impact', size = 32})

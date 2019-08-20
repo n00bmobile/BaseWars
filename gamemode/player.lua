@@ -1,3 +1,15 @@
+if CLIENT then
+	hook.Add('Think', 'bw_player_loadcheck', function()
+		if LocalPlayer():IsValid() then
+			net.Start('bw_player_loadfinish')
+			net.SendToServer()
+			hook.Remove('Think', 'bw_player_loadcheck')
+		end
+	end)
+return end
+
+util.AddNetworkString('bw_player_loadfinish')
+
 local toSync = {}
 function BaseWars.AddSync(name, func)
 	toSync[name] = func
@@ -7,13 +19,20 @@ function BaseWars.EndSync(name)
 	toSync[name] = nil
 end
 
-function GM:PlayerInitialSpawn(ply)
-	ply:SetupVars()
-	BaseWars.AddNotification(ply, 4, 'Welcome to Base Wars!\nMade free by n00bmobile.\n\nNeed Help?\nEverything you might ever need is in the F3 menu!')
-	
+function GM:PlayerLoaded(ply)
 	for k, v in pairs(toSync) do
 		v(ply)
 	end
+	
+	BaseWars.AddNotification(ply, 4, 'Welcome to Base Wars!\nMade free by n00bmobile.\n\nNeed Help?\nEverything you might ever need is in the F3 menu!')
+end
+
+net.Receive('bw_player_loadfinish', function(length, ply)
+	hook.Run('PlayerLoaded', ply)
+end)
+
+function GM:PlayerInitialSpawn(ply)
+	ply:SetupVars()
 end
 
 function GM:PlayerDisconnected(ply)

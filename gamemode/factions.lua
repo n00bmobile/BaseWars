@@ -26,11 +26,11 @@ function BaseWars.GetAllFactions()
 end
 
 if SERVER then
-	--util.AddNetworkString('bw_facmanager')
-	util.AddNetworkString('bw_facmanager_create')
-	util.AddNetworkString('bw_facmanager_sync')
+	--util.AddNetworkString('bw_factions')
+	util.AddNetworkString('bw_factions_create')
+	util.AddNetworkString('bw_factions_sync')
 	
-	local function filterPasswords()
+	local function noPassword()
 		local filtered = table.Copy(factions)
 		
 		for name, data in pairs(filtered) do
@@ -46,15 +46,15 @@ if SERVER then
 	end
 	
 	local function resync()
-		net.Start('bw_facmanager_sync')
-			net.WriteTable(filterPasswords())
+		net.Start('bw_factions_sync')
+			net.WriteTable(noPassword())
 		net.Broadcast()
 	end
 	
 	BaseWars.AddSync('bw_factions_sync', function(ply)
-		net.Start('bw_facmanager_sync')
-			net.WriteTable(filterPasswords())
-		net.Send(ply)
+		net.Start('bw_factions_sync')
+			net.WriteTable(noPassword())
+		net.Broadcast()
 	end)
 	
 	function meta:RemoveFromFaction()
@@ -93,7 +93,7 @@ if SERVER then
 		return ply == att or not ply:IsAlly(att)
 	end
 	
-	net.Receive('bw_facmanager_create', function(len, ply)
+	net.Receive('bw_factions_create', function(len, ply)
 		if ply:IsPartakingRaid() or ply:GetFaction() then return end
 		
 		local name = net.ReadString()
@@ -116,7 +116,7 @@ if SERVER then
 		end
 	end)
 
-	net.Receive('bw_facmanager_sync', function(len, ply)
+	net.Receive('bw_factions_sync', function(len, ply)
 		if ply:IsPartakingRaid() then return end
 		
 		local isJoining = net.ReadBool()
@@ -172,6 +172,6 @@ if SERVER then
 	end)]]
 return end
 
-net.Receive('bw_facmanager_sync', function()
+net.Receive('bw_factions_sync', function()
 	factions = net.ReadTable()
 end)
