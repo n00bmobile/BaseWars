@@ -9,6 +9,7 @@ Nearly everything should be listed here,
 let me know if there's something else you wish to easily customize in the gamemode.
 ]]
 
+BaseWars.Config.Language = "en-us"
 -- salary - How much money the player gets every 10 minutes.
 BaseWars.Config.salary = 500
 -- salary_xp_multiplier - How much XP the player gets every 10 minutes.
@@ -18,7 +19,7 @@ BaseWars.Config.drop_weapon = true
 -- respawn_delay - How long (in seconds) the player has to wait before respawning.
 BaseWars.Config.respawn_delay = 2
 -- starting_money - How much money a beginner player starts with.
-BaseWars.Config.starting_money = 12500
+BaseWars.Config.starting_money = 9000
 -- level_xp_min - How much XP is required at level 1, this value is later used as a base to calculate how much XP you'll need in each level.
 BaseWars.Config.level_xp_min = 250
 -- level_xp_max - Simply an XP cap.
@@ -30,21 +31,21 @@ BaseWars.Config.raid_duration = 300
 -- raid_cooldown - How much the player has to wait (in seconds) before being able to raid again.
 BaseWars.Config.raid_cooldown = 600
 -- raid_reward_prop - How much XP the raider is rewarded for destroying props. 
-BaseWars.Config.raid_reward_xp_prop = 250
+BaseWars.Config.raid_reward_xp_prop = 500
 -- raid_reward_ent - How much money the raider is rewarded for destroying entities.
-BaseWars.Config.raid_reward_ent = 1500
+BaseWars.Config.raid_reward_ent = 2000
 -- raid_reward_xp_ent - How much XP the raider is rewarded for destroying entities.
 BaseWars.Config.raid_reward_xp_ent = 2000
 -- raid_reward_xp_player - How much XP the raider is rewarded for killing players.
-BaseWars.Config.raid_reward_xp_player = 500
+BaseWars.Config.raid_reward_xp_player = 2000
 -- raid_reward_player - How much money the raider is rewarded for killing players.
-BaseWars.Config.raid_reward_player = 500
+BaseWars.Config.raid_reward_player = 2000
 -- raid_requirement - How much value a player's possessions together need to have before he can raid or be raided.
 BaseWars.Config.raid_requirement = 500000
 -- prop_material_health - How much health each prop has based on their material.
 BaseWars.Config.prop_material_health = {
-	[MAT_CONCRETE] = 800, --concrete
-	[MAT_METAL] = 1000, --metal
+	[MAT_CONCRETE] = 700, --concrete
+	[MAT_METAL] = 800, --metal
 }
 -- loadout - The weapons the player spawns with.
 BaseWars.Config.loadout = {
@@ -70,7 +71,7 @@ BaseWars.Config.buyables = {
 				name = 'Pistol',
 				model = 'models/weapons/w_pistol.mdl',
 				desc = 'It kills people.',
-				price = 5000,
+				price = 2000,
 				limit = 1,
 				level = 4
 			},
@@ -79,9 +80,9 @@ BaseWars.Config.buyables = {
 				name = 'SMG',
 				model = 'models/weapons/w_smg1.mdl',
 				desc = 'It kills people.',
-				price = 10000,
+				price = 6000,
 				limit = 1,
-				level = 8
+				level = 6
 			},
 		
 			['weapon_ar2'] = {
@@ -106,7 +107,7 @@ BaseWars.Config.buyables = {
 				name = 'Crossbow',
 				model = 'models/weapons/w_crossbow.mdl',
 				desc = 'It kills people.',
-				price = 2000,
+				price = 1500,
 				limit = 1,
 				level = 2
 			},
@@ -115,7 +116,7 @@ BaseWars.Config.buyables = {
 				name = '.357 Magnum',
 				model = 'models/weapons/w_357.mdl',
 				desc = 'It kills people.',
-				price = 7500,
+				price = 4000,
 				limit = 1,
 				level = 6
 			},
@@ -124,16 +125,16 @@ BaseWars.Config.buyables = {
 				name = 'RPG Launcher',
 				model = 'models/weapons/w_rocket_launcher.mdl',
 				desc = 'It kills people.',
-				price = 100000,
+				price = 800000,
 				limit = 1,
-				level = 40
+				level = 30
 			},
 			
 			['weapon_frag'] = {
 				name = 'Frag Grenade',
 				model = 'models/weapons/w_grenade.mdl',
 				desc = 'It kills people.',
-				price = 13000,
+				price = 15000,
 				limit = 1,
 				level = 10
 			},
@@ -141,10 +142,10 @@ BaseWars.Config.buyables = {
 			['weapon_bw_timed'] = {
 				name = 'Timed Explosive Charge',
 				model = 'models/weapons/w_c4.mdl',
-				desc = 'Deals massive damage in a short range.\nGood for destroying objects.',
+				desc = 'Deals massive damage in a very short range.\nGood for destroying objects.',
 				price = 50000,
 				limit = 1,
-				level = 10
+				level = 15
 			},
 		}
 	},
@@ -210,7 +211,7 @@ BaseWars.Config.buyables = {
 				name = 'SMG Ammo',
 				model = 'models/Items/BoxMRounds.mdl',
 				desc = "It's ammo.",
-				price = 20000,
+				price = 500,
 				limit = 1,
 				level = 0
 			},
@@ -268,17 +269,17 @@ BaseWars.Config.buyables = {
 			['weapon_bw_healgun'] = {
 				name = 'Heal Gun',
 				model = 'models/weapons/w_physics.mdl',
-				desc = "Slowly heals objects or players.",
-				price = 15000,
+				desc = 'It heals things, what did you expect?',
+				price = 80000,
 				limit = 1,
-				level = 5
+				level = 20
 			},
-		
+			
 			['bw_hstation'] = {
 				name = 'Health Station',
 				model = 'models/props_lab/reciever_cart.mdl',
 				desc = "It's free health, come get it!",
-				price = 30000,
+				price = 70000,
 				health = 200,
 				limit = 1,
 				level = 5
@@ -288,7 +289,7 @@ BaseWars.Config.buyables = {
 				name = 'Armor Station',
 				model = 'models/props_lab/reciever_cart.mdl',
 				desc = "It's free armor, come get it!",
-				price = 60000,
+				price = 35000,
 				health = 100,
 				limit = 1,
 				level = 5
@@ -298,7 +299,7 @@ BaseWars.Config.buyables = {
 				name = 'Repair Station',
 				model = 'models/props_c17/TrapPropeller_Engine.mdl',
 				desc = 'Repairs your props.',
-				price = 100000,
+				price = 80000,
 				health = 100,
 				limit = 5,
 				level = 20
@@ -318,7 +319,7 @@ BaseWars.Config.buyables = {
 				name = 'Munitions Crate',
 				model = 'models/items/ammocrate_smg1.mdl',
 				desc = "It's free ammo, come get it!",
-				price = 25000,
+				price = 500000,
 				health = 1,
 				limit = 1,
 				level = 10
@@ -517,11 +518,11 @@ BaseWars.Config.buyables = {
 			['bw_explosivemine'] = {
 				name = 'Explosive Mine',
 				model = 'models/props_combine/combine_mine01.mdl',
-				desc = 'A small damage mine capable of killing unsuspecting enemies.\nUneffective against aware opponents.',
-				price = 30000,
+				desc = 'A small damage proof mine capable of killing unsuspecting enemies.\nUneffective against aware opponents.',
+				price = 20000,
 				health = 0,
 				limit = 5,
-				level = 10
+				level = 5
 			},
 		}
 	},
@@ -566,7 +567,7 @@ BaseWars.Config.buyables = {
 				price = 180000,
 				health = 1000,
 				limit = 2,
-				level = 30
+				level = 35
 			},
 		}
 	},
