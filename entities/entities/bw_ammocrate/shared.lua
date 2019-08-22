@@ -6,5 +6,9 @@ ENT.Category = 'n00bmobile'
 ENT.Spawnable = true
 ENT.AdminSpawnable = true
 --[Customizable Values]--
-ENT.Cooldown = 60
+ENT.MaxAdditional = 2
+ENT.Cooldown = 45
+ENT.WeaponBlacklist = {
+	['weapon_frag'] = true,
+}
 -------------------------

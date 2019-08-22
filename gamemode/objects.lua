@@ -35,7 +35,7 @@ function GM:EntityTakeDamage(ent, dmg)
 			local isRaider = (attacker:IsPlayer() and attacker:IsRaiding(owner))
 			
 			if not isRaider then 
-				dmg:ScaleDamage(0.25)
+				dmg:ScaleDamage(0.1)
 			end
 			
 			ent:SetHealth(ent:Health() -dmg:GetDamage())

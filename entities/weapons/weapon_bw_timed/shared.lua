@@ -91,7 +91,7 @@ if SERVER then
 					local effect = EffectData()
 					effect:SetOrigin(ent:GetPos())
 					util.Effect('Explosion', effect)
-					util.BlastDamage(ent, ent:CPPIGetOwner(), ent:GetPos(), 100, 2000)
+					util.BlastDamage(ent, ent:CPPIGetOwner(), ent:GetPos(), 80, 9999999999)
 					ent:Remove()
 				else
 					if ent.NextDeduction <= CurTime() then
