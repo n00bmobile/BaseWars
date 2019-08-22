@@ -23,21 +23,33 @@ if not CLIENT then
 			local bought = BaseWars.Config.buyables[index].items[class]
 			
 			if bought and ply:CanAfford(bought.price) and ply:ReachesLevel(bought.level) then
-				local spawned = ply:SpawnInFront(class)
+				local count = 0
 				
-				if spawned then
-					--spawned:DropToFloor()
-					spawned:CPPISetOwner(ply)
-					ply:AddMoney(-bought.price)
-					ply:SendLua("surface.PlaySound('ambient/levels/labs/coinslot1.wav')")
-					BaseWars.AddNotification(ply, 1, 'You bought '..bought.name..' for '..BaseWars.FormatMoney(bought.price)..'.')
+				for k, v in pairs(ents.FindByClass(class)) do
+					if v:CPPIGetOwner() == ply then
+						count = count +1
+					end
+				end
+				
+				if count < bought.limit then
+					local spawned = ply:SpawnInFront(class)
 					
-					if bought.health and bought.health > 0 then
-						spawned:SetMaxHealth(bought.health)
-						spawned:SetHealth(bought.health)
+					if spawned then
+						--spawned:DropToFloor()
+						spawned:CPPISetOwner(ply)
+						ply:AddMoney(-bought.price)
+						ply:SendLua("surface.PlaySound('ambient/levels/labs/coinslot1.wav')")
+						BaseWars.AddNotification(ply, 1, 'You bought '..bought.name..' for '..BaseWars.FormatMoney(bought.price)..'.')
+					
+						if bought.health and bought.health > 0 then
+							spawned:SetMaxHealth(bought.health)
+							spawned:SetHealth(bought.health)
+						end
+					else
+						BaseWars.Notify(ply, 1, 10, "The object you tried to buy wasn't able to spawn. Face away from any obstacles and try again.")
 					end
 				else
-					BaseWars.Notify(ply, 1, 10, "The object you tried to buy wasn't able to spawn. Face away from any obstacles and try again.")
+					BaseWars.Notify(ply, 1, 10, "You can only have "..bought.limit.." of this spawned at a time.")
 				end
 			end
 		end
