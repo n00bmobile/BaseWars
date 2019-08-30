@@ -8,7 +8,7 @@ function GM:CanTool(ply, tr, tool)
 	local ent = tr.Entity
 	
 	if not ent:IsPlayer() and ent:GetClass() ~= 'prop_physics' and ent:CPPIGetOwner() then
-		if tool == 'remover' then
+		if tool == 'remover' and ply:KeyPressed(IN_ATTACK) then
 			if SERVER then
 				local price = ent:GetPrice() *BaseWars.Config.price_refund_multiplier
 				ent:CPPIGetOwner():AddMoney(price)
