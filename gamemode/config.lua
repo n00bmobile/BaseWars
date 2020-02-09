@@ -63,7 +63,7 @@ BaseWars.Config.buyables = {
 				model = 'models/weapons/w_crowbar.mdl', -- The item's model.
 				desc = 'It kills people... Sorta.', -- The item's description.
 				price = 500, -- The item's price.
-				limit = 1, -- The maximum quantity of the item that the player can have simultaneously in the world.
+				limit = 0, -- The maximum quantity of the item that the player can have simultaneously in the world. 0 to disable.
 				level = 0 -- The level required to buy this item.
 			},
 		
@@ -72,7 +72,7 @@ BaseWars.Config.buyables = {
 				model = 'models/weapons/w_pistol.mdl',
 				desc = 'It kills people.',
 				price = 2000,
-				limit = 1,
+				limit = 0,
 				level = 4
 			},
 		
@@ -81,7 +81,7 @@ BaseWars.Config.buyables = {
 				model = 'models/weapons/w_smg1.mdl',
 				desc = 'It kills people.',
 				price = 6000,
-				limit = 1,
+				limit = 0,
 				level = 6
 			},
 		
@@ -90,7 +90,7 @@ BaseWars.Config.buyables = {
 				model = 'models/weapons/w_irifle.mdl',
 				desc = 'It kills people.',
 				price = 12500,
-				limit = 1,
+				limit = 0,
 				level = 10
 			},
 			
@@ -99,7 +99,7 @@ BaseWars.Config.buyables = {
 				model = 'models/weapons/w_shotgun.mdl',
 				desc = 'It kills people.',
 				price = 12500,
-				limit = 1,
+				limit = 0,
 				level = 8
 			},
 			
@@ -108,7 +108,7 @@ BaseWars.Config.buyables = {
 				model = 'models/weapons/w_crossbow.mdl',
 				desc = 'It kills people.',
 				price = 1500,
-				limit = 1,
+				limit = 0,
 				level = 2
 			},
 			
@@ -117,7 +117,7 @@ BaseWars.Config.buyables = {
 				model = 'models/weapons/w_357.mdl',
 				desc = 'It kills people.',
 				price = 4000,
-				limit = 1,
+				limit = 0,
 				level = 6
 			},
 			
@@ -126,7 +126,7 @@ BaseWars.Config.buyables = {
 				model = 'models/weapons/w_rocket_launcher.mdl',
 				desc = 'It kills people.',
 				price = 800000,
-				limit = 1,
+				limit = 0,
 				level = 30
 			},
 			
@@ -135,7 +135,7 @@ BaseWars.Config.buyables = {
 				model = 'models/weapons/w_grenade.mdl',
 				desc = 'It kills people.',
 				price = 15000,
-				limit = 1,
+				limit = 0,
 				level = 10
 			},
 			
@@ -144,7 +144,7 @@ BaseWars.Config.buyables = {
 				model = 'models/weapons/w_c4.mdl',
 				desc = 'Deals massive damage in a very short range.\nGood for destroying objects.',
 				price = 50000,
-				limit = 1,
+				limit = 0,
 				level = 15
 			},
 		}

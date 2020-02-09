@@ -4,7 +4,7 @@ Go [here](https://forum.facepunch.com/gmodgd/bubuv/BaseWars-Gamemode-Release/1/)
 ## Documentation:
 
 **(SHARED)**\
-Entity:GetPrice() -> Returns the price the entity on the Store.\
+Entity:GetPrice() -> Returns the price the entity on the store.\
 Player:GetFaction() -> Returns the name of the player's faction and a table containing all the relevant information about it (Passwords are only accessible from the SERVER).\
 Player:CanRaid(Player victim)\
 Player:IsPartakingRaid() -> Returns 1 if the player is raiding and 2 is he's being raided.\
@@ -23,6 +23,7 @@ Player:SetLevel(Integer level)\
 Player:IsAlly(Player player)\
 BaseWars.GetAllFactions()\
 Player:InsertInFaction(String name)\
+Entity:IsBuyable(String name) -> Returns the whether the entity is the store or not.\
 BaseWars.GetChatCommands() -> Returns all chat commands.
 
 **(SERVER)**\
