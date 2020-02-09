@@ -1,5 +1,17 @@
 local meta = FindMetaTable('Entity')
 
+function meta:IsBuyable()
+	for order, data in pairs(BaseWars.Config.buyables) do
+		local found = data.items[self:GetClass()]
+		
+		if found then
+			return true
+		end
+	end
+	
+	return false
+end
+
 function meta:GetPrice()
 	for order, data in pairs(BaseWars.Config.buyables) do
 		local found = data.items[self:GetClass()]
@@ -23,33 +35,36 @@ if not CLIENT then
 			local bought = BaseWars.Config.buyables[index].items[class]
 			
 			if bought and ply:CanAfford(bought.price) and ply:ReachesLevel(bought.level) then
-				local count = 0
+				if bought.limit and bought.limit > 0 then
+					local count = 0
 				
-				for k, v in pairs(ents.FindByClass(class)) do
-					if v:CPPIGetOwner() == ply then
-						count = count +1
+					for k, v in pairs(ents.FindByClass(class)) do
+						if v:CPPIGetOwner() == ply then
+							count = count +1
+						end
+					end
+				
+					if count >= bought.limit then
+						BaseWars.Notify(ply, 1, 10, "You can only have "..bought.limit.." of this spawned at a time.")
+						return
 					end
 				end
 				
-				if count < bought.limit then
-					local spawned = ply:SpawnInFront(class)
+				local spawned = ply:SpawnInFront(class)
+				
+				if spawned then
+					--spawned:DropToFloor()
+					spawned:CPPISetOwner(ply)
+					ply:AddMoney(-bought.price)
+					ply:SendLua("surface.PlaySound('ambient/levels/labs/coinslot1.wav')")
+					BaseWars.AddNotification(ply, 1, 'You bought '..bought.name..' for '..BaseWars.FormatMoney(bought.price)..'.')
 					
-					if spawned then
-						--spawned:DropToFloor()
-						spawned:CPPISetOwner(ply)
-						ply:AddMoney(-bought.price)
-						ply:SendLua("surface.PlaySound('ambient/levels/labs/coinslot1.wav')")
-						BaseWars.AddNotification(ply, 1, 'You bought '..bought.name..' for '..BaseWars.FormatMoney(bought.price)..'.')
-					
-						if bought.health and bought.health > 0 then
-							spawned:SetMaxHealth(bought.health)
-							spawned:SetHealth(bought.health)
-						end
-					else
-						BaseWars.Notify(ply, 1, 10, "The object you tried to buy wasn't able to spawn. Face away from any obstacles and try again.")
+					if bought.health and bought.health > 0 then
+						spawned:SetMaxHealth(bought.health)
+						spawned:SetHealth(bought.health)
 					end
 				else
-					BaseWars.Notify(ply, 1, 10, "You can only have "..bought.limit.." of this spawned at a time.")
+					BaseWars.Notify(ply, 1, 10, "The object you tried to buy wasn't able to spawn. Face away from any obstacles and try again.")
 				end
 			end
 		end

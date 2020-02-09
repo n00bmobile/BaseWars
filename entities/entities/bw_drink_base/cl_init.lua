@@ -13,3 +13,9 @@ function ENT:Draw()
 		draw.WordBox(4, -(surface.GetTextSize(self.PrintName) /2), 0, self.PrintName, 'DermaLarge', Color(0, 0, 0, 200), color_white)
 	cam.End3D2D()
 end
+
+hook.Add('RenderScreenspaceEffects', 'bw_ents_drink_screeneffect', function()
+	if LocalPlayer():GetNWBool('isDrugged') then
+		DrawMaterialOverlay("effects/water_warp01", 0.05)
+	end
+end)

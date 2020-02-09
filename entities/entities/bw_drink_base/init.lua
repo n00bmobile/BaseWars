@@ -16,32 +16,65 @@ function ENT:Initialize()
 	end
 end
 
-local drugged = {}
+local users = {}
+
+local function clear(target)
+	if users[target] then
+		for k, v in pairs(users[target]) do
+			v.timeOut(target)
+		end
+
+		target:SetNWBool('isDrugged', false)
+		users[target] = nil
+	end
+end
 
 function ENT:Use(caller)
-	if drugged[caller] then
-		drugged[caller].timeOut(caller)
-		drugged[caller] = nil
+	self:Remove()
+	self.OnDrink(caller)
+	
+	if self.IsAntidote then
+		clear(caller)
+		return
 	end
 	
 	if self.Duration then
-		drugged[caller] = {
-			timeOut = self.OnTimeOut,
-			ending = CurTime() +self.Duration
-		}
+		if users[caller] then
+			if table.Count(users[caller]) == 2 then
+				caller:Kill()
+				return
+			end
+		else
+			users[caller] = {}
+		end
+		
+		local drink = self:GetClass()
+		users[caller][drink] = {}
+		users[caller][drink].timeOut = self.OnTimeOut
+		users[caller][drink].ending = CurTime() +self.Duration
+		caller:SetNWBool('isDrugged', true)
 	end
 	
-	self:EmitSound('ambient/levels/canals/toxic_slime_gurgle4.wav')
-	self.OnDrink(caller)
-	self:Remove()
+	caller:EmitSound('ambient/levels/canals/toxic_slime_gurgle4.wav')
 end
 
-hook.Add('Think', 'bw_ents_drink', function()
-	for drinker, data in pairs(drugged) do
-		if data.ending <= CurTime() then
-			data.timeOut(drinker)
-			drinker:EmitSound('vo/npc/male01/moan0'..math.random(1, 5)..'.wav')
-			drugged[drinker] = nil
+hook.Add('Think', 'bw_ents_drink_think', function()
+	for drinker, data in pairs(users) do
+		for drink, ddata in pairs(data) do
+			if ddata.ending <= CurTime() then
+				if table.Count(data) == 1 then
+					drinker:SetNWBool('isDrugged', false)
+					drinker:EmitSound('vo/npc/male01/moan0'..math.random(1, 5)..'.wav')
+					users[drinker] = nil
+				end
+				
+				ddata.timeOut(drinker)
+				users[drinker][drink] = nil
+			end
 		end
 	end
+end)
+
+hook.Add('PlayerDeath', 'bw_ents_drink_reset', function(victim)
+	clear(victim)
 end)

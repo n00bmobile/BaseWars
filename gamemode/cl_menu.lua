@@ -148,7 +148,12 @@ local function menu()
 					local up_name = ply:GetFaction()
 			
 					if up_name ~= name then
-						name = up_name
+						if up_name then
+							name = up_name
+						else
+							name = '<NONE>'
+						end
+
 						new_line:SetColumnText(2, name)
 					end
 			

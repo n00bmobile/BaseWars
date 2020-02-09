@@ -10,7 +10,7 @@ ENT.AdminSpawnable = true
 
 if SERVER then
 	ENT.OnDrink = function(ply)
-		local amount = math.random(5, 5000)
+		local amount = math.random(5, 3500)
 		ply:AddXP(amount)
 		ply:EmitSound('items/gift_drop.wav')
 		BaseWars.AddNotification(ply, 3, 'You got '..amount..'XP from a Mysterious Misture.')

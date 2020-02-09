@@ -7,6 +7,7 @@ ENT.Author = 'n00bmobile'
 ENT.Category = 'n00bmobile'
 ENT.Spawnable = true
 ENT.AdminSpawnable = true
+ENT.IsAntidote = true
 
 if SERVER then
 	ENT.OnDrink = function(ply)

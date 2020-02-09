@@ -30,7 +30,7 @@ if SERVER then
 			local attacker = dmg:GetAttacker()
 		
 			if attacker:IsPlayer() and active[attacker] then
-				dmg:ScaleDamage(1 *(active[attacker]/attacker:Health()) *0.5)
+				dmg:ScaleDamage(1 *(active[attacker]/attacker:Health()))
 			end
 		end
 	end)
