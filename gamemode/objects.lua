@@ -4,10 +4,6 @@ hook.Add('PhysgunPickup', 'bw_gm_sandboxhooksworkaround_physgunpickup', function
 	end
 end)
 
-function GM:CanTool(ply, tr, tool)
-	return not tr.Entity:IsBuyable() --disable toolgun on buyable entities
-end
-
 if CLIENT then return end
 
 function GM:EntityTakeDamage(ent, dmg)
@@ -100,4 +96,11 @@ end
 function GM:PlayerGiveSWEP(ply)
 	BaseWars.Notify(ply, 1, 5, "You're not allowed to give yourself weapons!")
 	return false
+end
+
+for order, data1 in pairs(BaseWars.Config.buyables) do
+	for name, data2 in pairs(data1.items) do
+		FPP.Blocked.Toolgun1[name] = true
+		FPP.Blocked.Spawning1[name] = true
+	end
 end
