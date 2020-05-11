@@ -9,7 +9,6 @@ Nearly everything should be listed here,
 let me know if there's something else you wish to easily customize in the gamemode.
 ]]
 
-BaseWars.Config.Language = "en-us"
 -- salary - How much money the player gets every 10 minutes.
 BaseWars.Config.salary = 500
 -- salary_xp_multiplier - How much XP the player gets every 10 minutes.
@@ -42,6 +41,10 @@ BaseWars.Config.raid_reward_xp_player = 2000
 BaseWars.Config.raid_reward_player = 2000
 -- raid_requirement - How much value a player's possessions together need to have before he can raid or be raided.
 BaseWars.Config.raid_requirement = 500000
+-- spawn_clearance - Who's allowed to spawn anything: 0 = everyone, 1 = admins, 2 = superadmins, 3 = no one
+BaseWars.Config.spawn_clearance = 2
+-- spawnmenu_hide - Whether or not to show only the Store and Spawnlist tabs in the spawn menu. I recommend to keep it true.
+BaseWars.Config.spawnmenu_hide = false
 -- prop_material_health - How much health each prop has based on their material.
 BaseWars.Config.prop_material_health = {
 	[MAT_CONCRETE] = 700, --concrete

@@ -1,27 +1,23 @@
 local meta = FindMetaTable('Entity')
 
-function meta:IsBuyable()
-	for order, data in pairs(BaseWars.Config.buyables) do
-		local found = data.items[self:GetClass()]
-		
-		if found then
-			return true
-		end
-	end
+function meta:GetPrice()
+	local order, found = BaseWars.FindBuyable(self:GetClass())
 	
-	return false
+	if found then
+		return found.price
+	else
+		return 0
+	end
 end
 
-function meta:GetPrice()
+function BaseWars.FindBuyable(class)
 	for order, data in pairs(BaseWars.Config.buyables) do
-		local found = data.items[self:GetClass()]
+		local found = data.items[class]
 		
 		if found then
-			return found.price
+			return order, found
 		end
 	end
-	
-	return 0
 end
 
 if not CLIENT then
@@ -137,14 +133,16 @@ spawnmenu.AddCreationTab('Store', function()
 	return scroll
 end, 'icon16/money.png', 200)
 
-function GM:PopulateContent() --remove everything else expect spawnlist
-	local key = 1
+if BaseWars.Config.spawnmenu_hide then
+	function GM:PopulateContent() --remove everything else expect spawnlist
+		local key = 1
 	
-	for i = 1, #g_SpawnMenu.CreateMenu.Items do
-		if g_SpawnMenu.CreateMenu.Items[key].Tab:GetText() ~= language.GetPhrase('spawnmenu.content_tab') and g_SpawnMenu.CreateMenu.Items[key].Tab:GetText() ~= 'Store' then
-			g_SpawnMenu.CreateMenu:CloseTab(g_SpawnMenu.CreateMenu.Items[key].Tab, true)
-		else
-			key = key +1
+		for i = 1, #g_SpawnMenu.CreateMenu.Items do
+			if g_SpawnMenu.CreateMenu.Items[key].Tab:GetText() ~= language.GetPhrase('spawnmenu.content_tab') and g_SpawnMenu.CreateMenu.Items[key].Tab:GetText() ~= 'Store' then
+				g_SpawnMenu.CreateMenu:CloseTab(g_SpawnMenu.CreateMenu.Items[key].Tab, true)
+			else
+				key = key +1
+			end
 		end
-    end
+	end
 end
