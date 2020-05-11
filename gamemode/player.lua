@@ -163,6 +163,20 @@ function meta:SetMoney(value)
 	self:SaveData()
 end
 
+function meta:CanSpawnSpecials()
+	local clearance = BaseWars.Config.spawn_clearance
+	
+	if clearance == 0 then
+		return true
+	elseif clearance == 1 then
+		return self:IsAdmin()
+	elseif clearance == 2 then
+		return self:IsSuperAdmin()
+	else
+		return false
+	end
+end
+
 timer.Create('bw_player_salary', 600, 0, function()
 	for k, v in pairs(player.GetAll()) do
 		v:AddXP(BaseWars.Config.salary_xp)

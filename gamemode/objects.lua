@@ -64,38 +64,66 @@ function GM:PlayerSpawnedProp(ply, mdl, ent)
 end
 
 function GM:PlayerSpawnEffect(ply)
-	BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn effects!")
-	return false
+	if ply:CanSpawnSpecials() then
+		return true
+	else
+		BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn effects!")
+		return false
+	end
 end
 
 function GM:PlayerSpawnNPC(ply)
-	BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn NPCs!")
-	return false
+	if ply:CanSpawnSpecials() then
+		return true
+	else
+		BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn NPCs!")
+		return false
+	end
 end
 
 function GM:PlayerSpawnRagdoll(ply)
-	BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn Ragdolls!")
-	return false
+	if ply:CanSpawnSpecials() then
+		return true
+	else
+		BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn Ragdolls!")
+		return false
+	end
 end
 
 function GM:PlayerSpawnSENT(ply)
-	BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn entities!")
-	return false
+	if ply:CanSpawnSpecials() then
+		return true
+	else
+		BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn entities!")
+		return false
+	end
 end
 
 function GM:PlayerSpawnSWEP(ply)
-	BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn weapons!")
-	return false
+	if ply:CanSpawnSpecials() then
+		return true
+	else
+		BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn weapons!")
+		return false
+	end
 end
 
 function GM:PlayerSpawnVehicle(ply)
-	BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn vehicles!")
-	return false
+	if ply:CanSpawnSpecials() then
+		return true
+	else
+		BaseWars.Notify(ply, 1, 5, "You're not allowed to spawn vehicles!")
+		return false
+	end
 end
 
 function GM:PlayerGiveSWEP(ply)
-	BaseWars.Notify(ply, 1, 5, "You're not allowed to give yourself weapons!")
-	return false
+	if ply:CanSpawnSpecials() then
+		return true
+	else
+		BaseWars.Notify(ply, 1, 5, "You're not allowed to give yourself weapons!")
+		return false
+	end
 end
 
 for order, data1 in pairs(BaseWars.Config.buyables) do
