@@ -159,6 +159,56 @@ BaseWars.AddChatCommand('/money', "Drops a specific amount of money.", function(
 	end
 end)
 
+------------------------------------------------------------
+-- Let me guess, there was no option for selling stuff?
+-- So, let it be. J.
+------------------------------------------------------------
+BaseWars.AddChatCommand('/sell', 'Sells your entity.', function(ply)
+	local ent = ply:GetEyeTrace().Entity
+
+	if ent:IsPlayer() or ent:GetClass() == 'prop_physics' then
+		BaseWars.Notify(ply, 1, 5, 'You can\'t sell this!')
+
+		return
+	end
+
+	if not ent:CPPIGetOwner() == ply then
+		BaseWars.Notify(ply, 1, 5, 'You can\'t sell other\'s entity!')
+
+		return
+	end
+
+	local refund 	= ent:GetPrice() * BaseWars.Config.price_refund_multiplier
+	local _, item	= BaseWars.FindBuyable(ent:GetClass())
+
+	ply:AddMoney(refund)
+
+	BaseWars.Notify(ply, 0, 30, 'You\'ve sold ' .. item.name .. ' for ' .. BaseWars.FormatMoney(refund))
+
+	ent:Remove()
+end)
+
+BaseWars.AddChatCommand('/sellall', 'Sells all your entities.', function(ply)
+	local refund = 0
+
+	for _, ent in next, ents.GetAll() do
+		if not ent:IsPlayer() and ent:CPPIGetOwner() == ply then
+			refund = refund + ent:GetPrice() * BaseWars.Config.price_refund_multiplier
+			ent:Remove()
+		end
+	end
+
+	ply:AddMoney(refund)
+
+	local t = refund > 0
+
+	BaseWars.Notify(ply, t and 0 or 1, 5, t and 'You\'ve sold all your entities for ' .. BaseWars.FormatMoney(refund) or 'You don\'t have entities to sell.')
+
+	-- Why the faq this code works here, but in my version of gamemode it returns 'WTFRUTRYINGTODOM8'
+end)
+
+-- And there is a bug, that allow you to sell weapons too
+
 --[[BaseWars.AddChatCommand('/reset', 'Gives you a fresh start by resetting your money and level.', function(ply)
 	for k, v in pairs(ents.GetAll()) do
 		if not v:IsPlayer() and v:CPPIGetOwner() == ply then
