@@ -68,10 +68,11 @@ function GM:PlayerSpawn(ply)
 end
 
 function GM:PlayerCanPickupWeapon(ply, wep)
-	if wep:GetPos():DistToSqr(ply:GetPos()) ~= 0 then
-		return ply:KeyPressed(IN_USE) and ply:GetEyeTrace().Entity == wep
-	else
+	if ply:KeyPressed(IN_USE) and ply:GetEyeTrace().Entity == wep then
+		wep:CPPISetOwner(nil)
 		return true
+	else
+		return false
 	end
 end
 

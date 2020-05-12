@@ -159,19 +159,82 @@ BaseWars.AddChatCommand('/money', "Drops a specific amount of money.", function(
 	end
 end)
 
---[[BaseWars.AddChatCommand('/reset', 'Gives you a fresh start by resetting your money and level.', function(ply)
-	for k, v in pairs(ents.GetAll()) do
-		if not v:IsPlayer() and v:CPPIGetOwner() == ply then
-			v:Remove()
-		end
-	end
+------------------------------------------------------------
+-- Let me guess, there was no option for selling stuff?
+-- So, let it be. J.
+------------------------------------------------------------
+BaseWars.AddChatCommand('/sell', "Sells the item you're looking at.", function(ply)
+	local raid = ply:IsPartakingRaid()
 	
-	ply:Spawn()
-	ply:SetLevel(1)
-	ply:SetMoney(BaseWars.Config.starting_money)
-	ply:SendLua('surface.PlaySound("ambient/alarms/warningbell1.wav")')
-	BaseWars.AddNotification(ply, 1, 'Your character has been reset!')
-end)]]
+	if raid ~= 1 and raid ~= 2 then --make it so he can't sell anything while being raided
+		local tr = ply:GetEyeTrace()
+	
+		if not tr.Entity:IsWorld() and tr.HitPos:Distance(ply:GetPos()) < 100 then --no long distance selling.
+			local _, item	= BaseWars.FindBuyable(tr.Entity:GetClass()) --[[
+				BaseWars.FindBuyable(String class) returns both the order of the category the item is in and its data, meaning you have acess to item data. 
+				Entity:GetPrice() uses this function internally, so by calling both you are essencially running a loop that you could've run only once twice.
+				
+				Here's how item data is structured:
+				{
+					name = "Item name",
+					model = "pathtomodel/itemmodel.mdl",
+					desc = "Item description",
+					price = 0,
+					limit = 0,
+					level = 0
+				}
+			]]
+		
+			if item then
+				if tr.Entity:CPPIGetOwner() == ply then
+					local refund = item.price * BaseWars.Config.price_refund_multiplier
+					ply:AddMoney(refund)
+					BaseWars.Notify(ply, 0, 10, 'You\'ve sold ' .. item.name .. ' for ' ..BaseWars.FormatMoney(refund))
+					BaseWars.AddNotification(ply, 3, 'You sold '..item.name..' for '..BaseWars.FormatMoney(refund)) --use the notification board for things that affect the player long term like money.
+					tr.Entity:Remove()
+				else
+					BaseWars.Notify(ply, 1, 5, "This isn't yours to sell!")
+				end
+			else
+				BaseWars.Notify(ply, 1, 5, 'You can\'t sell this!')
+			end
+		else
+			BaseWars.Notify(ply, 1, 8, 'You need to look from up close the item you want to sell!')
+		end
+	else
+		BaseWars.Notify(ply, 1, 5, "You can't sell during a raid.")
+	end
+end)
+
+BaseWars.AddChatCommand('/sellall', 'Sells all your items.', function(ply)
+	local raid = ply:IsPartakingRaid()
+	
+	if raid ~= 1 and raid ~= 2 then --make it so he can't sell anything while being raided
+		local refund = 0
+
+		for _, ent in next, ents.GetAll() do
+			local _, item	= BaseWars.FindBuyable(ent:GetClass())
+
+			if item and ent:CPPIGetOwner() == ply then
+				refund = refund + ent:GetPrice() * BaseWars.Config.price_refund_multiplier
+				ent:Remove()
+			end
+		end
+
+		if refund > 0 then
+			BaseWars.Notify(ply, 1, 10, 'You\'ve sold all your items for ' .. BaseWars.FormatMoney(refund))
+			BaseWars.AddNotification(ply, 3, "You sold all your items for "..BaseWars.FormatMoney(refund)) --use the notification board for things that affect the player long term like money.
+			ply:AddMoney(refund) --[[
+			Player:AddMoney(number amount) uses the NWVars system internally, more specifically NWString. 
+			Everytime you call it you are sending an entire string (to mitigate floating point errors) to the client even if you didn't change anything (tl;dr Player:AddMoney(0) is a no no)
+			]]
+		else
+			BaseWars.Notify(ply, 1, 5, 'You don\'t have items to sell.')
+		end
+	else
+		BaseWars.Notify(ply, 1, 1, "You can't sell during a raid.")
+	end
+end)
 
 if SERVER then
 	util.AddNetworkString('bw_chatsystem_pm')
