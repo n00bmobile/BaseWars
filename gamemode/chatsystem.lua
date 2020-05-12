@@ -199,7 +199,13 @@ BaseWars.AddChatCommand('/sellall', 'Sells all your entities.', function(ply)
 	local refund = 0
 
 	for _, ent in next, ents.GetAll() do
-		if not (ent:IsPlayer() or ent:GetClass() == 'prop_physics') and ent:CPPIGetOwner() == ply then
+		local _, item	= BaseWars.FindBuyable(ent:GetClass())
+
+		if item == nil or ent:IsPlayer() or ent:GetClass() == 'prop_physics' then
+			continue
+		end
+
+		if ent:CPPIGetOwner() == ply then
 			refund = refund + ent:GetPrice() * BaseWars.Config.price_refund_multiplier
 			ent:Remove()
 		end
