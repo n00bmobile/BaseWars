@@ -391,7 +391,7 @@ local function menu()
 	sheet:AddSheet('Rules', rul_background, 'icon16/book_open.png')
 	
 	local webpage = vgui.Create('HTML', rul_background)
-	webpage:OpenURL('www.google.com')
+	webpage:OpenURL(BaseWars.Config.rulesURL)
 	webpage:Dock(FILL)
 	
 	in_display = frame
