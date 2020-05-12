@@ -178,8 +178,15 @@ BaseWars.AddChatCommand('/sell', 'Sells your entity.', function(ply)
 		return
 	end
 
-	local refund 	= ent:GetPrice() * BaseWars.Config.price_refund_multiplier
 	local _, item	= BaseWars.FindBuyable(ent:GetClass())
+
+	if item == nil then
+		BaseWars.Notify(ply, 1, 5, 'You need to be pointed at sellable entity!')
+
+		return
+	end
+
+	local refund 	= ent:GetPrice() * BaseWars.Config.price_refund_multiplier
 
 	ply:AddMoney(refund)
 
@@ -192,7 +199,7 @@ BaseWars.AddChatCommand('/sellall', 'Sells all your entities.', function(ply)
 	local refund = 0
 
 	for _, ent in next, ents.GetAll() do
-		if not ent:IsPlayer() and ent:CPPIGetOwner() == ply then
+		if not (ent:IsPlayer() or ent:GetClass() == 'prop_physics') and ent:CPPIGetOwner() == ply then
 			refund = refund + ent:GetPrice() * BaseWars.Config.price_refund_multiplier
 			ent:Remove()
 		end
@@ -203,8 +210,6 @@ BaseWars.AddChatCommand('/sellall', 'Sells all your entities.', function(ply)
 	local t = refund > 0
 
 	BaseWars.Notify(ply, t and 0 or 1, 5, t and 'You\'ve sold all your entities for ' .. BaseWars.FormatMoney(refund) or 'You don\'t have entities to sell.')
-
-	-- Why the faq this code works here, but in my version of gamemode it returns 'WTFRUTRYINGTODOM8'
 end)
 
 -- And there is a bug, that allow you to sell weapons too
