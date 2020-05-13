@@ -38,7 +38,7 @@ BaseWars.AddChatCommand('/pm', 'Sends a private message to a specific player.', 
 	end
 end)
 
-BaseWars.AddChatCommand('/weapon', 'Drops the weapon you are holding.', function(ply)
+BaseWars.AddChatCommand('/dropweapon', 'Drops the weapon you are holding.', function(ply)
 	local wep = ply:GetActiveWeapon()
 	
 	if IsValid(wep) then

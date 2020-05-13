@@ -7,6 +7,8 @@ Next Version:
 -Spawn List in Store Tab
 ]]
 
+-- https://fptje.github.io/glualint-web/ use it for better formatting
+
 --client
 AddCSLuaFile('cl_init.lua')
 AddCSLuaFile('cl_hud.lua')
