@@ -113,6 +113,10 @@ function GM:PlayerDeath(victim, ent, attacker)
 	end
 end
 
+function BaseWars:GetFallDamage(ply, spd) 
+    return math.Remap(spd / 8, 0, ply:GetMaxSpeed(), 1, ply:GetMaxHealth())
+end
+
 local meta = FindMetaTable('Player')
 function meta:SaveData()
 	local data = {
