@@ -7,7 +7,7 @@ string.MaxLen(String string, number length)\
 Entity:GetPrice()
 Player:GetFaction() > Returns the name of the player's faction and its data (Password are serverside only).\
 Player:CanRaid(Player victim)\
-Player:IsPartakingRaid() > Returns 1 if the player is raiding and 2 is he's being raided.\
+Player:IsPartakingRaid() > Returns 1 if the player is raiding and 2 if he's being raided.\
 Player:IsRaiding(Player player) > Returns true if the player is raiding provided player.\
 Player:IsRaidable() > Returns true if the player is able to raid and be raided.\
 Player:CanAfford(number amount)\
@@ -37,12 +37,12 @@ BaseWars.Notify(Player target, number type, number time, String message) > Defau
 BaseWars.AddNotification(Player target, number type, String message) -> Notification board.\
 BaseWars.StopRaid()\
 BaseWars.StartRaid(Player victim, Player attacker)\
-BaseWars.AddChatCommand(String command, String description, callback)\
-BaseWars.AddSync(String identifier, callback) > Acts like a hook, calling the specified function everytime a player loads/reloads (I MIGHT REMOVE IT OR CHANGE ITS BEHAVIOR, BEWARE).\
+BaseWars.AddChatCommand(String command, String description, function callback)\
+BaseWars.AddSync(String identifier, function callback) > Acts like a hook, calling the specified function everytime a player loads/reloads (I MIGHT REMOVE IT OR CHANGE ITS BEHAVIOR, BEWARE).\
 BaseWars.EndSync(String identifier) > Self-explanatory (I MIGHT REMOVE IT OR CHANGE ITS BEHAVIOR, BEWARE).\
 GM:PlayerLoaded(Player player) > Hook for when the player's game loads.
 
 **Clientside**\
-BaseWars.Notify(Integer type, Number time, String message) > Default Garry's Mod notification, notifies the client It's being called on.\
-BaseWars.AddNotification(Integer type, String message) > Notification board, notifies the client It's being called on.\
+BaseWars.Notify(number type, number time, String message) > Default Garry's Mod notification, notifies the client It's being called on.\
+BaseWars.AddNotification(number type, String message) > Notification board, notifies the client It's being called on.\
 draw.Circle(number x, number y, number Radius, String texture, Color color)

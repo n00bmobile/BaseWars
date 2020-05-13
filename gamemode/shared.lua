@@ -1,6 +1,6 @@
 GM.Name = 'BaseWars'
 GM.Author = 'n00bmobile'
-GM.Version = '1.4.2'
+GM.Version = '1.4.3'
 
 DeriveGamemode('sandbox')
 BaseWars = GM or GAMEMODE
