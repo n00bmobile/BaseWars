@@ -10,8 +10,7 @@ let me know if there's something else you wish to easily customize in the gamemo
 ]]
 
 -- Rules URL for f3 menu
-BaseWars.Config.rulesURL = 'https://github.com/n00bmobile/BaseWars/blob/master/README.md'
-
+BaseWars.Config.rulesURL = 'http://www.google.com/'
 -- salary - How much money the player gets every 10 minutes.
 BaseWars.Config.salary = 500
 -- salary_xp_multiplier - How much XP the player gets every 10 minutes.
