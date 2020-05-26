@@ -12,23 +12,24 @@ function GM:EntityTakeDamage(ent, dmg)
 
 		if owner then
 			local att = dmg:GetAttacker()
-			local isRaider = (att:IsPlayer() and att:IsRaiding(owner))
+			local raider = (att:IsPlayer() and att:IsRaiding(owner))
 			
-			if not isRaider then 
-				dmg:ScaleDamage(0.1)
+			if not raider then 
+				dmg:ScaleDamage(BaseWars.Config.raid_dmg_penalty_percentage)
 			end
 
 			if ent:GetClass() ~= 'prop_physics' then
 				ent:SetHealth(ent:Health() -dmg:GetDamage())
 				
-				if ent:Health() <= 0 then
-					if isRaider then
+				if not ent.HasExploded and ent:Health() <= 0 then
+					if raider then
 						att:AddXP(BaseWars.Config.raid_reward_xp_ent)
 						att:AddMoney(BaseWars.Config.raid_reward_ent) 
 						BaseWars.AddNotification(att, 3, "You've been rewarded "..BaseWars.FormatMoney(BaseWars.Config.raid_reward_ent)..' and '..BaseWars.Config.raid_reward_xp_ent..'XP for destroying '..ent.PrintName..'!')
 					end
 				
-					local price = ent:GetPrice() *BaseWars.Config.price_refund_multiplier
+					ent.HasExploded = true
+					local price = ent:GetPrice() *BaseWars.Config.price_refund_percentage
 					owner:AddMoney(price)
 					BaseWars.AddNotification(owner, 2, 'You got '..BaseWars.FormatMoney(price)..' for your destroyed '..(ent.PrintName or 'Object')..'.')
 					local explosion = EffectData()
@@ -36,13 +37,13 @@ function GM:EntityTakeDamage(ent, dmg)
 					util.Effect('Explosion', explosion)
 					ent:Remove()
 				end
-			elseif owner ~= att then
+			else
 				ent:SetHealth(ent:Health() -dmg:GetDamage())				
 				local percentage = math.Clamp(ent:Health() /ent:GetMaxHealth(), 0, 1)
 				ent:SetColor(Color(255, 255 *percentage, 255 *percentage))
 		
 				if ent:Health() <= 0 then
-					if isRaider then 
+					if raider then 
 						att:AddXP(BaseWars.Config.raid_reward_xp_prop) 
 					end
 					
@@ -58,7 +59,7 @@ function GM:EntityTakeDamage(ent, dmg)
 end
 
 function GM:PlayerSpawnedProp(ply, mdl, ent)
-	local health = BaseWars.Config.prop_material_health[ent:GetMaterialType()] or 100
+	local health = BaseWars.Config.prop_mat_health[ent:GetMaterialType()] or 100
 	ent:SetMaxHealth(health)
 	ent:SetHealth(health)
 end

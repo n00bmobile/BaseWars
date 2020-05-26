@@ -17,7 +17,7 @@ function ENT:Initialize()
 end
 
 function ENT:OnRemove()
-	if self:Health() < 0 then
+	if self:Health() < 0 then --remover tool does not trigger an explosion
 		util.BlastDamage(self, self, self:GetPos(), 200, 200)
 	end
 end

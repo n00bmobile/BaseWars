@@ -86,7 +86,7 @@ if SERVER then
 		
 		if start then	
 			local target = net.ReadEntity()
-			print(target:IsRaidable())
+			
 			if ply:CanRaid(target) then
 				BaseWars.StartRaid(target, ply)
 			end

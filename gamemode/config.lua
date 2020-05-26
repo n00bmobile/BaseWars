@@ -9,8 +9,8 @@ Nearly everything should be listed here,
 let me know if there's something else you wish to easily customize in the gamemode.
 ]]
 
--- Rules URL for f3 menu
-BaseWars.Config.rulesURL = 'http://www.google.com/'
+-- rules_url - Rules URL for F3 menu
+BaseWars.Config.rules_url = 'http://www.google.com/'
 -- salary - How much money the player gets every 10 minutes.
 BaseWars.Config.salary = 500
 -- salary_xp_multiplier - How much XP the player gets every 10 minutes.
@@ -25,16 +25,18 @@ BaseWars.Config.starting_money = 9000
 BaseWars.Config.level_xp_min = 250
 -- level_xp_max - Simply an XP cap.
 BaseWars.Config.level_xp_max = 12500
--- price_refund_multiplier - Multiplies the original price of a destroyed entity to refund the victim.
-BaseWars.Config.price_refund_multiplier = 0.5
+-- price_refund_percentage - Multiplies the original price of a destroyed entity to refund the victim (def.: 50% of actual value).
+BaseWars.Config.price_refund_percentage = 0.5
+-- raid_dmg_penalty_percentage - All incoming damage to a player's possessions is multiplied by this value when the attacker isn't raiding its owner (def.: 10% of actual damage).
+BaseWars.Config.raid_dmg_penalty_percentage = 0.1
 -- raid_duration - The duration of a raid (in seconds).
 BaseWars.Config.raid_duration = 300
 -- raid_cooldown - How much the player has to wait (in seconds) before being able to raid again.
 BaseWars.Config.raid_cooldown = 600
--- raid_reward_prop - How much XP the raider is rewarded for destroying props. 
-BaseWars.Config.raid_reward_xp_prop = 500
 -- raid_reward_ent - How much money the raider is rewarded for destroying entities.
 BaseWars.Config.raid_reward_ent = 2000
+-- raid_reward_prop - How much XP the raider is rewarded for destroying props. 
+BaseWars.Config.raid_reward_xp_prop = 500
 -- raid_reward_xp_ent - How much XP the raider is rewarded for destroying entities.
 BaseWars.Config.raid_reward_xp_ent = 2000
 -- raid_reward_xp_player - How much XP the raider is rewarded for killing players.
@@ -43,12 +45,12 @@ BaseWars.Config.raid_reward_xp_player = 2000
 BaseWars.Config.raid_reward_player = 2000
 -- raid_requirement - How much value a player's possessions together need to have before he can raid or be raided.
 BaseWars.Config.raid_requirement = 500000
--- spawn_clearance - Who's allowed to spawn anything: 0 = everyone, 1 = admins, 2 = superadmins, 3 = no one
-BaseWars.Config.spawn_clearance = 3
+-- spawnmenu_clearance - Who's allowed to spawn anything: 0 = everyone, 1 = admins, 2 = superadmins, 3 = no one
+BaseWars.Config.spawnmenu_clearance = 3
 -- spawnmenu_hide - Whether or not to show only the Store and Spawnlist tabs in the spawn menu. I recommend to keep it true.
 BaseWars.Config.spawnmenu_hide = true
--- prop_material_health - How much health each prop has based on their material.
-BaseWars.Config.prop_material_health = {
+-- prop_mat_health - How much health each prop has based on their material.
+BaseWars.Config.prop_mat_health = {
 	[MAT_CONCRETE] = 700, --concrete
 	[MAT_METAL] = 800, --metal
 }
@@ -58,8 +60,8 @@ BaseWars.Config.loadout = {
 	['weapon_physgun'] = true,
 	['gmod_tool'] = true,
 }
--- buyables - Stuff for sale.
-BaseWars.Config.buyables = {
+-- buyables - Stuff for sale. USE THIS ADDON FOR FASTER AND BETTER EDITING: https://steamcommunity.com/sharedfiles/filedetails/?id=2093514162
+BaseWars.Config.buyables = { 
 	[1] = { -- Order of the category in the menu.
 		name = 'Weaponry', -- The category's name.
 		items = { -- The items available to purchase in the category.
@@ -613,7 +615,7 @@ BaseWars.Config.buyables = {
 			['bw_drink_damage'] = {
 				name = 'Damage Increase',
 				model = 'models/props_junk/PopCan01a.mdl',
-				desc = 'Significantly boosts you for a short amount of time.',
+				desc = 'You deal more and more damage as your health depletes upon drinking.',
 				price = 90000,
 				limit = 1,
 				level = 6

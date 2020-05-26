@@ -169,7 +169,7 @@ function meta:SetMoney(value)
 end
 
 function meta:CanSpawnSpecials()
-	local clearance = BaseWars.Config.spawn_clearance
+	local clearance = BaseWars.Config.spawnmenu_clearance
 	
 	if clearance == 0 then
 		return true
