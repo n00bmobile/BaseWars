@@ -13,7 +13,7 @@ let me know if there's something else you wish to easily customize in the gamemo
 BaseWars.Config.rules_url = 'http://www.google.com/'
 -- salary - How much money the player gets every 10 minutes.
 BaseWars.Config.salary = 500
--- salary_xp_multiplier - How much XP the player gets every 10 minutes.
+-- salary_xp - How much XP the player gets every 10 minutes.
 BaseWars.Config.salary_xp = 500
 -- drop_weapon - Whether the player should drop his weapon upon death or not (true to enable or false to disable).
 BaseWars.Config.drop_weapon = true

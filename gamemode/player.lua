@@ -40,7 +40,7 @@ function GM:PlayerDisconnected(ply)
 	
 	for k, v in pairs(ents.GetAll()) do
 		if not v:IsPlayer() and v:GetClass() ~= 'prop_physics' and v:CPPIGetOwner() == ply then
-			refund = refund +v:GetPrice() *BaseWars.Config.price_refund_multiplier
+			refund = refund +v:GetPrice() *BaseWars.Config.price_refund_percentage
 			v:Remove()
 		end
 	end

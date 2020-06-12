@@ -187,7 +187,7 @@ BaseWars.AddChatCommand('/sell', "Sells the item you're looking at.", function(p
 		
 			if item then
 				if tr.Entity:CPPIGetOwner() == ply then
-					local refund = item.price * BaseWars.Config.price_refund_multiplier
+					local refund = item.price * BaseWars.Config.price_refund_percentage
 					ply:AddMoney(refund)
 					BaseWars.Notify(ply, 0, 10, 'You\'ve sold ' .. item.name .. ' for ' ..BaseWars.FormatMoney(refund))
 					BaseWars.AddNotification(ply, 3, 'You sold '..item.name..' for '..BaseWars.FormatMoney(refund)) --use the notification board for things that affect the player long term like money.
@@ -216,7 +216,7 @@ BaseWars.AddChatCommand('/sellall', 'Sells all your items.', function(ply)
 			local _, item	= BaseWars.FindBuyable(ent:GetClass())
 
 			if item and ent:CPPIGetOwner() == ply then
-				refund = refund + ent:GetPrice() * BaseWars.Config.price_refund_multiplier
+				refund = refund + ent:GetPrice() * BaseWars.Config.price_refund_percentage
 				ent:Remove()
 			end
 		end
