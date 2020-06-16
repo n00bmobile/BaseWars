@@ -47,8 +47,13 @@ function GM:EntityTakeDamage(ent, dmg)
 						att:AddXP(BaseWars.Config.raid_reward_xp_prop) 
 					end
 					
+					local pobj = ent:GetPhysicsObject()
+					
+					if pobj:IsValid() then
+						pobj:EnableMotion(true)
+					end
+					
 					constraint.RemoveAll(ent)
-					ent:GetPhysicsObject():EnableMotion(true)
 					ent:SetCollisionGroup(COLLISION_GROUP_WORLD)
 					--ent:EmitSound('physics/concrete/concrete_break'..math.random(2, 3)..'.wav')
 					timer.Simple(5, function() if ent:IsValid() then ent:Remove() end end)
