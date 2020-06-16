@@ -113,7 +113,7 @@ net.Receive('bw_ents_mprinter', function(len, ply)
 					if ply:CanAfford(data.price) then
 						if name == 'Speed' then
 							ent:SetPrintSpeed(data.value)
-							ent.NextPrint = CurTime() +data.value
+							--ent.NextPrint = CurTime() +data.value
 						elseif name == 'Capacity' then
 							ent:SetPrintCapacity(data.value)
 						else
