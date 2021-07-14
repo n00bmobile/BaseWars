@@ -18,6 +18,8 @@ function BaseWars.FindPlayer(name)
 end
 
 function BaseWars.FormatMoney(amount)
+	if not isnumber(amount) then return '0'
+	
 	if amount >= 1000000000 then --1.000.000.000
 		return '$'..string.Comma(amount *10^-9)..' billion'
 	elseif amount >= 1000000 then
